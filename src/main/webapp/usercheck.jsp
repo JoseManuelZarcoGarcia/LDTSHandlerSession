@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,25 +8,29 @@
 </head>
 <body>
 	<h1>Session checker</h1>
-	
+
 	<p>Verificando si su sesión ha sido validada</p>
-	
+
 	<%
-	String usuario ="";
+	String usuario = "";
 	try { //AQUI VA EL CONTROL DE SESION
-	usuario = session.getAttribute("attributo2").toString();
-	String acceso = session.getAttribute("attributo1").toString();
-	if (acceso.equals("1")) {
+		usuario = session.getAttribute("user").toString();
+		String acceso = session.getAttribute("activo").toString();
+		if (acceso.equals("1")) {
 	%>
-	<p>Su sesión se ha validado correctamente. Bienvenido <%=usuario%></p>
+	<p>
+		Su sesión se ha validado correctamente. Bienvenido
+		<%=usuario%></p>
 	<%
 	}
-	}
-	catch (Exception e) {
+	} catch (Exception e) {
 	%>
-	<p style="color: red;">Su usuario no ha sido validado</p>
+	<p style="color: red;">Lo sentimos su cuenta está desactivada</p>
 	<%
 	}
 	%>
+
+	<a href="index.jsp">Volver a inicio</a>
+
 </body>
 </html>
