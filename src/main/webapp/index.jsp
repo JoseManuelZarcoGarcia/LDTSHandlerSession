@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+
+<%
+    if (session.getAttribute("user") != null && "1".equals(session.getAttribute("activo"))) {
+        response.sendRedirect("bienvenido.jsp");
+    }
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "https://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +15,9 @@
 <link rel="stylesheet" href="common/general.css">
 
 <script type="text/javascript">
+
+
+
 function compruebayenvia() {
 	datos=document.iniciosesion;
 	if (datos.usuario.value == '' ||
@@ -16,6 +25,7 @@ function compruebayenvia() {
 		alert ('¡Tiene que rellenar todos los campos!');
 	else datos.submit();
 }
+
 function compruebanums(campo, evento) {
 	var keycode;
 	if (window.event) keycode = window.event.keyCode;
@@ -31,6 +41,7 @@ function compruebanums(campo, evento) {
 	}
 	else return true;
 }
+
 function compruebaalfan(campo, evento) {
 	var keycode;
 	if (window.event) keycode = window.event.keyCode;
@@ -50,21 +61,31 @@ function compruebaalfan(campo, evento) {
 }
 </script>
 </head>
-<body>
+<body style="padding-top: 10%">
 
-<h1>Iniciar Sesión en la App</h1>
-<form action="./LoginAuthenticator" method="post" name="iniciosesion" id="iniciosesion">
-<table style="text-align: left; border: none;">
-<tr><td>
-<input type="hidden" name="varoculta" value="secreto"/>
-Usuario:
-	</td><td><input type="text" name="usuario" onkeypress="return compruebaalfan(this,event);" maxlength="10" value="" class="inputgris"/>
-</td></tr><tr><td>Contraseña:
-	</td><td><input type="password" name="pass" onkeypress="return compruebaalfan(this,event);" maxlength="8" value="" class="inputgris"/>
-</td></tr><tr><td>
-	</td><td style="text-align: right;">
-		<input type="button" name="send" value="Enviar" onclick="compruebayenvia();"/>
-</td></tr></table>
-</form>
+	<h1>Iniciar Sesión en la App</h1>
+	<form action="./LoginAuthenticator" method="post" name="iniciosesion"
+		id="iniciosesion">
+		<table style="text-align: left; border: none;">
+			<tr>
+				<td><input type="hidden" name="varoculta" value="secreto" />
+					Usuario:</td>
+				<td><input type="text" name="usuario"
+					onkeypress="return compruebaalfan(this,event);" maxlength="10"
+					value="" class="inputgris" /></td>
+			</tr>
+			<tr>
+				<td>Contraseña:</td>
+				<td><input type="password" name="pass"
+					onkeypress="return compruebaalfan(this,event);" maxlength="8"
+					value="" class="inputgris" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td style="text-align: right;"><input type="button" name="send"
+					value="Enviar" onclick="compruebayenvia();" /></td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>
