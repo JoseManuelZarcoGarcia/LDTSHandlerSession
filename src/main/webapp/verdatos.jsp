@@ -1,16 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@page import="mipk.beanDB"%>
+<%@page import="us.ldts.mypkg.beanDB"%>
 <%@page import="java.sql.SQLException"%>
 
 <%
 try {  //AQUI VA EL CONTROL DE SESION
-	String acceso = session.getAttribute("attributo1").toString();
+	String acceso = session.getAttribute("activo").toString();
  	if (!acceso.equals("1")) response.sendRedirect("cerrarsesion.jsp");
 } catch (Exception e) {
 	response.sendRedirect("cerrarsesion.jsp");
 }
+
+/*
+if (session.getAttribute("user") != null && "1".equals(session.getAttribute("activo"))) {
+    response.sendRedirect("bienvenido.jsp");
+    return;
+}*/
 
 beanDB db = new beanDB();
 boolean okdb = false;
@@ -60,7 +66,7 @@ else {
 
 </head>
 <body>
-<h1><%=session.getAttribute("attributo2") %>: Estos son los datos datos</h1>
+<h1><%=session.getAttribute("user") %>: Estos son los datos datos</h1>
 <hr/>
 <p><a href="bienvenido.jsp">Página principal</a></p>
 <p><a href="cerrarsesion.jsp">Salir</a></p>
